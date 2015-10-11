@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="walter <louja@qq.com>">
+
+
+
+<body>
+<div class="container">
+    <section class="loginBox row">
+
+        <section class="col-md-7 left">
+            <h2>用户登录</h2>
+            <form>
+                <div class="form-group">
+                    <input type="email" class="form-control"  placeholder="电子邮箱">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control"  placeholder="密码">
+                </div>
+                <button type="button" id="btnlogin" class="btn btn-default">登录</button>
+            </form>
+        </section>
+
+        <section class="col-md-5 right">
+            <h2>没有帐户？</h2>
+            <section>
+                <p>你为啥还没有帐户呢?速度加入我们吧....</p>
+
+                <p><a  href="/register" class="btn btn-default regBtn">注册</a></p>
+            </section>
+        </section>
+
+    </section>
+    <!-- /loginBox -->
+</div>
+<!-- /container -->
+<link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+<link rel='stylesheet' href='/stylesheets/login.css' />
+
+<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="/javascripts/bootstrap.js"></script>
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!--应用js-->
+<script src="/javascripts/login.js"></script>
+
+</body>
+</html>

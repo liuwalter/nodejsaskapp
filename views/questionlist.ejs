@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <%- include head.ejs %>
+</head>
+<body>
+
+<%- include am.ejs %>
+
+<!--main-container-part-->
+<div id="content">
+    <!--breadcrumbs-->
+    <div id="content-header">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <a id="task-pre" class="task-changebt">←</a>
+            <div id="task-content">
+                <ul class="macro-component-tab" id="task-content-inner">
+                    <li class="macro-component-tabitem noclose  tip-bottom" app-id="0" app-url="/Home/Index" class="tip-bottom" app-name="控制面板">
+                        <span class="macro-tabs-item-text"><i class="icon-home"></i><a href="/admin">控制面板></a></span>
+                    </li>
+                    <li class="macro-component-tabitem noclose  tip-bottom" app-id="0" app-url="/Home/Index" class="tip-bottom" app-name="控制面板">
+                        <span class="macro-tabs-item-text"><i class="icon-home"></i><a href="/admin/channel" class="active"  id="cur" select="questionlist">问题列表</a></span>
+                    </li>
+
+                </ul>
+                <div style="clear:both;"></div>
+            </div>
+            <a id="task-next" class="task-changebt" style="display: none;">→</a>
+        </div>
+
+        <div class="container-fluid containertop">
+            <!--<div class="alert alert-success" id="events-result" data-es="Aquí se muestra el resultado del evento">
+                 显示操作数据
+            </div>-->
+
+            <div class="form-group operator">
+                <button type="button" class="btn btn-success" opt="add" data-toggle="modal" href="/admin/channel/detail" data-target="#modal">新增</button>
+                <button type="button" class="btn btn-danger"  opt="delete">删除</button>
+                <button type="button" class="btn btn-info"    opt="update">修改</button>
+                <button type="button" class="btn btn-warning"    opt="status" status="0">禁用</button>
+                <button type="button" class="btn btn-success"    opt="status" status="1">启用</button>
+            </div>
+
+            <table  id="tbchannel"   data-show-toggle="true"   data-side-pagination="server" data-pagination="true"  data-show-columns="true"  data-search="true">
+
+            </table>
+
+            <div class="modal fade" id="modal" tabindex="1000" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+    <!--End-breadcrumbs-->
+
+
+
+</div>
+<!--end-main-container-part-->
+
+<%- include pm.ejs %>
+
+
+<script type="text/javascript">
+    require(['questionlist'], function (questionlist){
+        //初始化
+        questionlist.init();
+    });
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="walter <louja@qq.com>">
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+    <link rel='stylesheet' href='/stylesheets/font-awesome.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrapValidator.css' />
+  </head>
+  <body>
+
+  <!-- 头部导航 -->
+  <div class='navbar'>
+    <div class='navbar-inner'>
+      <div class='hcontainer'>
+        <div class='brand'>
+          问码
+        </div>
+
+        <form id='search_form' class='navbar-search' action="/search">
+          <input type='text' id='q' name='q' class='search-query span3' value='' placeholder="搜索全站、站外内容"/>
+        </form>
+
+        <ul class='nav pull-right'>
+          <li><a href='/'>首页</a></li>
+          <li><a href="/about" target="">关于</a></li>
+          <% if (user==null) { %>
+          <li><a class="open-login" href="javascript:void(0);">登录</a></li>
+          <li><a class="open-reg" href="javascript:void(0);">注册</a></li>
+          <% } %>
+          <% if (user!=null) { %>
+
+          <li><a class="" href="/users/profile"><%=user.nickname%></a></li>
+          <li><a class="open-logout" href="javascript:void(0);">登出</a></li>
+          <% } %>
+
+
+
+        </ul>
+
+      </div>
+    </div>
+  </div>
+  <!-- 结束导航 -->
+
+
+
+  <div id="content" class="clearfix">
+    <div class="content">
+
+        <div class="head mod-white">
+          <div class="channels">
+
+            <% if (channels.length) { %>
+
+              <% channels.forEach(function(channel){ %>
+            <div class="channel "><a href="/qa?channel_id=<%=channel._id%>" class="name"><%=channel.channelname%></a>
+              <div class="others"><span class="views item"><span class="index">问题数：</span><a class="value"><%=channel.qacount%></a></span><span class="views item"><span class="index">浏览：</span><a class="value"><%=channel.browsercount%></a></span></div>
+              <div class="desc"><%=channel.qadesc%></div>
+            </div>
+              <% }) %>
+
+            <% } %>
+
+          </div>
+          <div class="publish-tip alert">如要发表问题，请点击分类进入之后，再发表到此分类。</div>
+              </div>
+      <div class="qa-list mod-white">
+        <div class="qa-item  ">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/On-the-question-answering-system-you-should-pay-attention-to-what-please-read-before-using" title="关于问答系统，你应该注意什么，使用前请阅读。" rel="bookmark">
+
+                关于问答系统，你应该注意什么，使用前请阅读。</a><span class="label tip hot">HOT</span><span class="label tip admin">官方</span>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">5970</a></span><span class="views item"><span class="index">回答</span><a class="value">10</a></span><span class="time item"><a class="value">2年前</a></span>
+            </div>
+            <div class="user"><a data-original-title="代码诗人芋头" href="/user/1"><img src="http://tp1.sinaimg.cn/1717808700/50/5656122350/1">
+                <div class="sex nan"></div></a></div>
+          </div>
+        </div>
+        <div class="qa-item yooo new">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/Ask-for-help-Vuejs-component-rendering-problem" title="求救！Vue.js组件渲染问题?" rel="bookmark">
+
+                求救！Vue.js组件渲染问题?</a><span class="label tip new">求回答</span>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">9</a></span><span class="views item"><span class="index">回答</span><a class="value">0</a></span><span class="time item"><a class="value">1天前</a></span><span class="tags item"><a href="/tag/n/vue.js" class="value">vue.js</a><a href="/tag/n/mvvm" class="value">mvvm</a></span>
+            </div>
+            <div class="user"><a data-original-title="从小就耍帅" href="/user/6170"><img src="http://tp2.sinaimg.cn/1652859425/50/5612600864/1">
+                <div class="sex nan"></div></a></div>
+          </div>
+        </div>
+        <div class="qa-item  new">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/Overseas-opportunities-to-consider" title="海外机会要不要考虑" rel="bookmark">
+
+                海外机会要不要考虑</a><span class="label tip new">求回答</span>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">66</a></span><span class="views item"><span class="index">回答</span><a class="value">0</a></span><span class="time item"><a class="value">4天前</a></span>
+            </div>
+            <div class="user"><a data-original-title="猎头leo" href="/user/6396"><img src="http://tp2.sinaimg.cn/5563967697/50/0/1">
+                <div class="sex nan"></div></a></div>
+          </div>
+        </div>
+        <div class="qa-item yooo ">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/ClearInterval-cant-stop-setInterval" title="clearInterval无法停止setInterval了!" rel="bookmark">
+
+                clearInterval无法停止setInterval了!</a>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">116</a></span><span class="views item"><span class="index">回答</span><a class="value">1</a></span><span class="time item"><a class="value">7天前</a></span><span class="tags item"><a href="/tag/n/闭包&amp;作用域" class="value">闭包&amp;作用域</a></span>
+            </div>
+            <div class="user"><a data-original-title="郑转鑫" href="/user/6414"><img src="http://tp4.sinaimg.cn/2203764911/50/5641131818/1"></a></div>
+          </div>
+        </div>
+        <div class="qa-item  new">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/Webhook-PHP-exec-gitlab-call-shell-script-Pull-git-command-cannot-be-executed-in-the-shell-script" title="gitlab webhook php exec 调用 shell 脚本。shell 脚本中调用 git pull 命令无法执行。" rel="bookmark">
+
+                gitlab webhook php exec 调用 shell 脚本。shell 脚本中调用 git pull 命令无法执行。</a><span class="label tip new">求回答</span>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">52</a></span><span class="views item"><span class="index">回答</span><a class="value">0</a></span><span class="time item"><a class="value">8天前</a></span>
+            </div>
+            <div class="user"><a data-original-title="小吴的电脑" href="/user/3426"><img src="http://tp2.sinaimg.cn/1969877153/50/40057694675/1"></a></div>
+          </div>
+        </div>
+        <div class="qa-item yooo new">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/Now-doing-a-survey-on-the-IT-project-management-your-opinion-is-very-important-the-relationship-between-what-I-eat-tonight-and-demand-points" title="现在在做一个IT项目管理的调查问卷，你的意见很重要，关系到我今晚吃什么，求点！" rel="bookmark">
+
+                现在在做一个IT项目管理的调查问卷，你的意见很重要，关系到我今晚吃什么，求点！</a><span class="label tip new">求回答</span>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">70</a></span><span class="views item"><span class="index">回答</span><a class="value">0</a></span><span class="time item"><a class="value">9天前</a></span>
+            </div>
+            <div class="user"><a data-original-title="Yvonne倪燕婷" href="/user/6391"><img src="http://tp4.sinaimg.cn/2266717235/50/5719596332/0">
+                <div class="sex nv"></div></a></div>
+          </div>
+        </div>
+        <div class="qa-item  ">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/Ask-a-input-width-adaptive-problem" title="问一个input宽度自适应问题" rel="bookmark">
+
+                问一个input宽度自适应问题</a>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">282</a></span><span class="views item"><span class="index">回答</span><a class="value">2</a></span><span class="time item"><a class="value">18天前</a></span>
+            </div>
+            <div class="user"><a data-original-title="小泽-rmvb" href="/user/6333"><img src="http://tp4.sinaimg.cn/1790870443/50/5685590304/1">
+                <div class="sex nan"></div></a></div>
+          </div>
+        </div>
+        <div class="qa-item yooo new">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/Why-didnt-I-answer-the-handlebarsjs-question-9-days" title="为嘛我的handlebars.js问题没人回答？？？都9天了。。。" rel="bookmark">
+
+                为嘛我的handlebars.js问题没人回答？？？都9天了。。。</a><span class="label tip new">求回答</span>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">284</a></span><span class="views item"><span class="index">回答</span><a class="value">0</a></span><span class="time item"><a class="value">22天前</a></span>
+            </div>
+            <div class="user"><a data-original-title="elevenliuliu" href="/user/6223"><img src="http://tp2.sinaimg.cn/2618694273/50/5721829318/0">
+                <div class="sex nv"></div></a></div>
+          </div>
+        </div>
+        <div class="qa-item  ">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/Why-JavaScript-cant-change-the-value-of-the-element-by-changing-the-value-of-the-text-property" title="为什么javascript不能通过改变text属性的值来改变元素显示的值" rel="bookmark">
+
+                为什么javascript不能通过改变text属性的值来改变元素显示的值</a>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">226</a></span><span class="views item"><span class="index">回答</span><a class="value">4</a></span><span class="time item"><a class="value">23天前</a></span>
+            </div>
+            <div class="user"><a data-original-title="歌小熊" href="/user/1477"><img src="http://tp2.sinaimg.cn/1739306297/50/40047351568/1">
+                <div class="sex nan"></div></a></div>
+          </div>
+        </div>
+        <div class="qa-item yooo ">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/How-to-construct-a-sustainable-small-and-medium-sized-website" title="怎样构建一个可持续迭代的中小型网站" rel="bookmark">
+
+                怎样构建一个可持续迭代的中小型网站</a>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">351</a></span><span class="views item"><span class="index">回答</span><a class="value">1</a></span><span class="time item"><a class="value">1个月前</a></span>
+            </div>
+            <div class="user"><a data-original-title="leega0" href="/user/3914"><img src="http://tp2.sinaimg.cn/1705875685/50/40049298512/1">
+                <div class="sex nan"></div></a></div>
+          </div>
+        </div>
+        <div class="qa-item  ">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/How-the-front-page-write-cycle-such-as-how-to-dynamically-load-Li-UL-Li-content-from-the-background-to-get" title="前端页面怎么写循环，比如如何动态加载ul下的li，li的内容从后台获取" rel="bookmark">
+
+                前端页面怎么写循环，比如如何动态加载ul下的li，li的内容从后台获取</a>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">378</a></span><span class="views item"><span class="index">回答</span><a class="value">3</a></span><span class="time item"><a class="value">1个月前</a></span>
+            </div>
+            <div class="user"><a data-original-title="有头没尾没内容故事大王" href="/user/6265"><img src="http://tp4.sinaimg.cn/3174126883/50/5679368521/1"></a></div>
+            <div class="answer clearfix">
+              <div class="answer-user"><a data-original-title="FantasyShao"><img src="http://tp4.sinaimg.cn/2054390823/50/40017091629/1"></a></div>
+              <div class="answer-con">
+                建议用模板，具体怎么使用得看你的项目中的 JavaScritp 代码是如何组织的；在 Github 上搜索 “template” 可以搜到很多：https://github.c
+                <a href="/qa/1392#answer-1252">阅读更多</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="qa-item yooo ">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/Where-to-seek-the-front-help-to-go-faster" title="寻求前端帮助去哪里比较快捷呢" rel="bookmark">
+
+                寻求前端帮助去哪里比较快捷呢</a>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">261</a></span><span class="views item"><span class="index">回答</span><a class="value">2</a></span><span class="time item"><a class="value">1个月前</a></span>
+            </div>
+            <div class="user"><a data-original-title="有头没尾没内容故事大王" href="/user/6265"><img src="http://tp4.sinaimg.cn/3174126883/50/5679368521/1"></a></div>
+          </div>
+        </div>
+        <div class="qa-item  ">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/JSON-the-call-of-the-parser" title="JSON解析器的调用...错在那里...." rel="bookmark">
+
+                JSON解析器的调用...错在那里....</a>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">244</a></span><span class="views item"><span class="index">回答</span><a class="value">2</a></span><span class="time item"><a class="value">1个月前</a></span><span class="tags item"><a href="/tag/n/JavaScript" class="value">JavaScript</a></span>
+            </div>
+            <div class="user"><a data-original-title="CRPER" href="/user/5808"><img src="http://tp3.sinaimg.cn/2249307830/50/40021442381/1">
+                <div class="sex nan"></div></a></div>
+            <div class="answer clearfix">
+              <div class="answer-user"><a data-original-title="半傻小仙"><img src="http://tp4.sinaimg.cn/1861842627/50/22832045690/1"></a></div>
+              <div class="answer-con">
+                你的text是个JSON数组，JSON.parse()是用来解析JSON字符串的。你可以选择用JSON.stringify()来将一个对象转化为string。
+
+                几个例子：
+
+
+                1，var jsons
+                <a href="/qa/1390#answer-1253">阅读更多</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="qa-item yooo ">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/Get-the-href-from-the-a-tag-to-the-img-tag-that-you-already-know-about-ID-and-that-you-are-not-too-familiar" title="把得到<a>标签中的‘href’传给已经知道id的<img>标签,自己不是太懂还请具体点" rel="bookmark">
+
+                把得到&lt;a&gt;标签中的‘href’传给已经知道id的&lt;img&gt;标签,自己不是太懂还请具体点</a>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">180</a></span><span class="views item"><span class="index">回答</span><a class="value">2</a></span><span class="time item"><a class="value">1个月前</a></span><span class="tags item"><a href="/tag/n/jQuery" class="value">jQuery</a></span>
+            </div>
+            <div class="user"><a data-original-title="幸福不再认真" href="/user/6264"><img src="http://tp1.sinaimg.cn/5606941380/50/5728698896/1">
+                <div class="sex nan"></div></a></div>
+          </div>
+        </div>
+        <div class="qa-item  ">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/Download-multiple-files-through-JS" title="如何通过js实现下载多个文件？" rel="bookmark">
+
+                如何通过js实现下载多个文件？</a>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">205</a></span><span class="views item"><span class="index">回答</span><a class="value">3</a></span><span class="time item"><a class="value">1个月前</a></span>
+            </div>
+            <div class="user"><a data-original-title="邓木琴居然被盗用了" href="/user/6186"><img src="http://tp2.sinaimg.cn/1851996753/50/5712122039/1">
+                <div class="sex nan"></div></a></div>
+          </div>
+        </div>
+        <div class="qa-item yooo ">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/Why-the-instance-of-the-prototype-object-is-covered-the-instance-still-points-to-the-original-object" title="为什么实例原型对象被覆盖，实例仍然指向原始对象" rel="bookmark">
+
+                为什么实例原型对象被覆盖，实例仍然指向原始对象</a>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">196</a></span><span class="views item"><span class="index">回答</span><a class="value">1</a></span><span class="time item"><a class="value">1个月前</a></span><span class="tags item"><a href="/tag/n/JavaScript" class="value">JavaScript</a></span>
+            </div>
+            <div class="user"><a data-original-title="港曲1986" href="/user/6236"><img src="http://tp4.sinaimg.cn/1885824803/50/0/1">
+                <div class="sex nan"></div></a></div>
+          </div>
+        </div>
+        <div class="qa-item  ">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/Can-you-help-explain-the-algorithm-of-two-sentences" title="能帮忙解释一下两句代码的算法意思吗？" rel="bookmark">
+
+                能帮忙解释一下两句代码的算法意思吗？</a>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">282</a></span><span class="views item"><span class="index">回答</span><a class="value">1</a></span><span class="time item"><a class="value">1个月前</a></span>
+            </div>
+            <div class="user"><a data-original-title="青蛙寒冰" href="/user/6231"><img src="http://tp3.sinaimg.cn/1586152402/50/1281850949/1">
+                <div class="sex nan"></div></a></div>
+          </div>
+        </div>
+        <div class="qa-item yooo new">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/About-handlebarsjs" title="有关handlebars.js" rel="bookmark">
+
+                有关handlebars.js</a><span class="label tip new">求回答</span>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">352</a></span><span class="views item"><span class="index">回答</span><a class="value">0</a></span><span class="time item"><a class="value">1个月前</a></span>
+            </div>
+            <div class="user"><a data-original-title="elevenliuliu" href="/user/6223"><img src="http://tp2.sinaimg.cn/2618694273/50/5721829318/0">
+                <div class="sex nv"></div></a></div>
+          </div>
+        </div>
+        <div class="qa-item  ">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/JSONP-and-Ajax-speed-comparison" title="JSONP和ajax的速度比较" rel="bookmark">
+
+                JSONP和ajax的速度比较</a>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">545</a></span><span class="views item"><span class="index">回答</span><a class="value">2</a></span><span class="time item"><a class="value">1个月前</a></span><span class="tags item"><a href="/tag/n/性能优化" class="value">性能优化</a><a href="/tag/n/前端架构" class="value">前端架构</a><a href="/tag/n/前端开发" class="value">前端开发</a><a href="/tag/n/AJAX" class="value">AJAX</a></span>
+            </div>
+            <div class="user"><a data-original-title="梦里的那个她会钢琴" href="/user/6187"><img src="http://tp3.sinaimg.cn/1962069590/50/5703846885/1">
+                <div class="sex nan"></div></a></div>
+          </div>
+        </div>
+        <div class="qa-item yooo ">
+          <div class="entry-title">
+            <h2 class="title"><a href="/qa/Nodejs" title="nodejs" rel="bookmark">
+
+                nodejs</a>
+            </h2>
+            <div class="others"><span class="views item"><span class="index">浏览</span><a class="value">261</a></span><span class="views item"><span class="index">回答</span><a class="value">1</a></span><span class="time item"><a class="value">2个月前</a></span>
+            </div>
+            <div class="user"><a data-original-title="睿思361" href="/user/5820"><img src="http://tp2.sinaimg.cn/3764249105/50/0/1"></a></div>
+          </div>
+        </div>
+      </div>
+      <div class="pagination clearfix">
+        <ul>
+          <li class="disabled"><a>Prev</a></li>
+          <li class="active"><a href="?page=1">1</a></li>
+          <li class=""><a href="?page=2">2</a></li>
+          <li> <a href="javascript:void(0);">...</a></li>
+          <li class=""><a href="?page=28">28</a></li>
+          <li class=""><a href="?page=29">29</a></li>
+          <li class=""><a href="?page=30">30</a></li>
+          <li><a href="?page=2">Next</a></li>
+        </ul>
+        <div class="total label">共 596 </div>
+      </div>
+       </div>
+  </div>
+
+
+  <!--登录框-->
+  <div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="LoginCtrl" ng-init="init()">
+    <form id="loginInform" action="/users/login" accept-charset="UTF-8" method="post"  autocomplete="off">
+      <div class="modal-dialog modal-login">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button class="close" type="button" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 id="myModalLabel" class="modal-title">
+              <span class="action on " data="login">登陆</span><span class="zc" data="reg">注册</span>
+            </h4>
+          </div>
+          <div class="modal-body">
+
+              <div id="frmcontent">
+              <div class="form-group">
+                <i class="fa fa-envelope"></i>
+                <input class="form-control" type="text" placeholder="登陆邮箱" id="lemail" name="lemail"/>
+                <input class="form-control ng-hide" type="text" placeholder="注册邮箱" id="semail"  name="semail" />
+              </div>
+
+              <div class="form-group fixtop">
+                <i class="fa fa-unlock-alt"></i><input class="form-control" type="password" placeholder="密码6位以上" name="pwd" autocomplete="off"  />
+              </div>
+
+              <div class="form-group ng-hide fixtop" id="frmnickname">
+                <i class="fa fa-user"></i><input id="nickname" class="form-control" type="text" placeholder="昵称" name="nc" />
+              </div>
+
+              <div class="form-group row" id="frmauto">
+
+                <div class="col-md-8">
+                <input id="remember" type="checkbox" name="remember" />
+                <label for="remember">自动登陆</label></div><a class="right col-md-4 txtright" href="/forget" target="_blank">忘记密码？</a>
+              </div>
+
+              <div class="form-group" id="frmlogin">
+                <button class="btn btn-success" type="submit">登陆</button>
+              </div>
+
+              <div class="form-group ng-hide" id="frmregister">
+                <button class="btn btn-success" type="submit">注册</button>
+              </div>
+              </div>
+
+
+          </div>
+          <div class="modal-footer txtcenter">
+            其他登录方式正在开通中...
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+
+
+
+  <script src="/javascripts/jquery.min.js"></script>
+  <script src="/javascripts/bootstrap.js"></script>
+  <script src="/javascripts/bootstrapValidator.js"></script>
+  <script src="/javascripts/jquery.form.js"></script>
+  <script src="/javascripts/index.js"></script>
+
+
+  </body>
+</html>

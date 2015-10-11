@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="author" content="walter <louja@qq.com>"/>
+    <link rel='stylesheet' href='/stylesheets/main.css'/>
+    <link rel='stylesheet' href='/stylesheets/newpost.css'/>
+    <link rel='stylesheet' href='/stylesheets/font-awesome.css'/>
+    <link rel="stylesheet" href="/stylesheets/editor.css" />
+
+</head>
+<body>
+
+<!-- 头部导航 -->
+<div class="navbar navbar-default" id="navbar" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class=" navbar-brand icon-logo logintext" href="/" title="问码">问码</a>
+            <a id="mSearch" class="mobile-search glyphicon glyphicon-search" href="javascript:void 0;"></a>
+
+            <form class="navbar-form navbar-right" id="navbarForm" action="/search/" method="GET" role="search">
+                <div class="form-group">
+                    <input class="form-control" type="text" maxlength="50" placeholder="搜索问题、帖子、文章" name="wd">
+                </div>
+                <button class="btn icon-search glyphicon glyphicon-search ct" type="submit">&nbsp;</button>
+
+            </form>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="nav navbar-nav navbar-right" id="unlogined">
+                <li class="navbar-sign">
+                    <a rel="nofollow" href="/user/reg">注册</a>
+                </li>
+                <li class="navbar-login">
+                    <a rel="nofollow" href="/user/login" data-operation="login">登录</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="nav nav-main" id="navMain">
+    <ul class="container">
+        <li><a href="/">首页</a></li>
+        <li><a href="/course/">技术文章</a>
+        </li>
+        <li><a href="/topic/">书籍</a></li>
+        <li class="active"><a href="/talk/">活动</a></li>
+        <li><a href="/post/">问吧</a></li>
+        <li class="guide"><a id="guideLink" href="/help/" target="_blank"><span class="icon-guide"></span>新手入门</a></li>
+    </ul>
+</div>
+
+
+<div class="wrap">
+    <div class="main">
+        <div class="block">
+            <h1 class="title-b">发布提问</h1>
+
+            <form id="newPost" class="form" action="" method="post">
+
+                <div class="post-eva">
+                    <div class="post-info">
+                        <label class="form-label" for="money">赏金</label>
+                        <input type="text" name="money" id="money" class="post-title" placeholder="请输入您的赏金"
+                               autofocus="" required="" value="">
+                    </div>
+
+                    <div class="post-info">
+                        <label class="form-label" for="title">标题</label>
+                        <input type="text" name="title" id="title" class="post-title" placeholder="请在这里输入你的标题" value="">
+                    </div>
+
+                    <div class="post-info">
+                        <label class="form-label label-course" for="channel">类别</label>
+                        <select class="sort" id="channel" name="channel">
+                            <option selected="" value="0">选择类别</option>
+                            <% if (channels.length) { %>
+                            <% channels.forEach(function(channel){ %>
+                            <option  value="<%=channel._id%>"><%=channel.channelname%></option>
+                            <% }) %>
+                            <% } %>
+
+                        </select>
+                    </div>
+                    <div class="post-info post-content">
+                        <label class="form-label ueditoe-label" for="html">内容</label>
+
+                        <div class="content-tips">
+                            <p>
+                                发问题,请遵守问码的问规<a href="javascript:void(0);"
+                                                         target="_blank">《问码问规》</a>
+                            </p>
+
+                            <textarea name="html" id="postDesc" class="post-desc"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-do">
+                    <a href="/post/" class="">取消</a>
+                    <input type="button" class="btn-primary" value="发布" id="btnpublish"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="side"><a href="/post/" class="side-back"><span
+                    class="side-back-arrow"></span>问码首页</a></div>
+</div>
+
+
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/bootstrap.js"></script>
+<script src="/javascripts/lib/select2.min.js"></script>
+<script src="/javascripts/lib/dy.editor.js"></script>
+<script type="text/javascript">
+
+    $(function() {
+        //初始化编辑器
+        window.initEditor("#postDesc", {
+            content_css: "http://static.guokr.com/apps/academy/styles/editor/d9f10a0f.content.css",
+            width: 556,
+            scroll_top_offset: 0,
+            submit_form_selector: "#newPost",
+            toolbar: "bold italic | link gkimage video blockquote | bullist numlist  formula | fullscreen",
+            atFunc: function(){}
+        });
+        //绑定发布事件
+        $("#btnpublish").on("click",function(){
+            //获取赏金
+            var money=$("#money").val();
+            //获取问题标题
+            var title=$("#title").val();
+            //获取分类
+            var channel=$("#channel").val();
+            //获取问题内容
+            var content=tinyMCE.activeEditor.getContent();
+            $.post("/qa/new",{money:money,title:title,channel:channel,content:content},function(r){
+               if(r.status)
+               {
+                   console.log(r);
+                   window.location.href= r.gateurl;
+               }
+            });
+
+        });
+    })
+</script>
+</body>
+</html>

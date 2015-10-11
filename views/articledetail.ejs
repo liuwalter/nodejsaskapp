@@ -1,0 +1,115 @@
+
+<link rel='stylesheet' href='/ueditor/themes/default/css/ueditor.css ' />
+<link rel='stylesheet' href='/ueditor/third-party/codemirror/codemirror.css' />
+<link rel='stylesheet' href='/stylesheets/select2.min.css' />
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">文章</h4>
+</div>
+<div class="modal-body">
+
+    <!--main-container-part-->
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <form class="form-horizontal" method="post" action="#" name="frmdata" id="frmdata" novalidate="novalidate">
+                <input type="hidden" value="<%=article._id%>" id="articleid"/>
+                <div class="control-group">
+                    <label class="control-label">文章分类</label>
+                    <div class="controls">
+                        <select id="articletype"  style="width:50%">
+                            <% if (channels.length) { %>
+
+                            <% channels.forEach(function(channel){ %>
+
+                            <option value="<%=channel._id%>"  <%if(channel._id==article.channel){%> selected <%}%>  ><%=channel.channelname%></option>
+                            <% }) %>
+
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">文章标题</label>
+                    <div class="controls">
+                        <input type="text" name="title" id="title"  style="width:50%;" placeholder="文章标题" value="<%=article.title%>">
+                    </div>
+                </div>
+
+                <div class="control-group">
+
+                    <label class="control-label">文章摘要</label>
+                    <div class="controls col-md-5" style="width: 62%">
+                        <textarea name="summary" id="summary"  style="width:100%;"   placeholder="文章摘要"  rows="3"><%=article.summary%></textarea>
+                    </div>
+
+
+                    <label class="control-label">图片</label>
+                    <div class="controls col-md-5">
+                        <input type="file" />
+
+                    </div>
+                    <div style="position: relative; right:20px; top:1px; width:80px;height:80px;" id="dvpreview">
+                        <img src="<%=article.mainimage%>" style=" width:80px;height:80px;">
+                    </div>
+
+
+                </div>
+
+
+                <div class="control-group">
+                    <label class="control-label">文章详情</label>
+                    <input type="hidden" value="<%=article.content%>" id="editorcontent">
+                    <div class="controls">
+                        <script id="editor" type="text/plain" style="width:100%;height:150px;"></script>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">标签</label>
+                    <div class="controls">
+                        <select multiple="multiple"  id="select1" style="width:100%;height:26px;" >
+                            <% if (tags.length) { %>
+                            <% tags.forEach(function(tag){ %>
+                            <option value="<%=tag._id%>"  <%if(article.tags.indexOf(tag._id)>=0){%> selected <%}%>  ><%=tag.tagname%></option>
+                            <% }) %>
+
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+                <!--<div class="control-group">
+                    <label class="control-label">标签</label>
+                    <div class="controls">
+                        <span class="label label-success">html5</span>
+                        <span class="label label-success">js</span>
+                        <span class="label label-success">css3</span>
+                    </div>-->
+                </div>
+
+            </form>
+
+
+
+        </div>
+    </div>
+    <!--end-main-container-part-->
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="btnsave" data-loading-text="......" autocomplete="off">保存</button>
+    </div>
+
+    <script type="text/javascript">
+        require(['articledetail'], function (articledetail){
+            //初始化
+            articledetail.init();
+        });
+
+    </script>
+
+

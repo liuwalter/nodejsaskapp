@@ -1,0 +1,53 @@
+
+<link rel='stylesheet' href='/ueditor/themes/default/css/ueditor.css ' />
+<link rel='stylesheet' href='/ueditor/third-party/codemirror/codemirror.css' />
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">分类</h4>
+</div>
+<div class="modal-body">
+
+<!--main-container-part-->
+<div class="container-fluid">
+
+    <div class="row">
+
+                    <form class="form-horizontal" method="post" action="#" name="frmdata" id="frmdata" novalidate="novalidate">
+
+                        <div class="control-group">
+                            <label class="control-label">分类名</label>
+                            <div class="controls">
+                                <input type="text" name="txtchannelname" id="txtchannelname" class="col-md-5" placeholder="分类名">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">分类描述</label>
+                            <div class="controls">
+                                <script id="editor" type="text/plain" style="width:650px;height:200px;"></script>
+                            </div>
+                        </div>
+                    </form>
+
+
+
+    </div>
+</div>
+<!--end-main-container-part-->
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+    <button type="button" class="btn btn-primary" id="channelsave" data-loading-text="......" autocomplete="off">保存</button>
+</div>
+
+    <script type="text/javascript">
+        require(['channeldetail'], function (channeldetail){
+            //初始化
+            channeldetail.init();
+        });
+
+    </script>
+
+

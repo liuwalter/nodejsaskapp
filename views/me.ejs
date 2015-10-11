@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="walter <louja@qq.com>">
+
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+
+    <style>
+        body{
+            background:#e0e0e0;
+        }
+        .panel
+        {
+            width:520px;
+            height:400px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 6px;
+            padding: 10px;
+            float: left;
+            margin: 10px;
+        }
+        .panel video
+        {
+
+            width:500px;
+        }
+        .panel canvas
+        {
+
+            width:500px;
+        }
+    </style>
+
+
+
+</head>
+<body>
+
+<!-- 头部导航 -->
+<div class='navbar'>
+    <div class='navbar-inner'>
+        <div class='hcontainer'>
+            <h3></h3>
+        </div>
+    </div>
+</div>
+<!-- 结束导航 -->
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+
+            <article>
+                <video id="video" muted loop autoplay>
+
+                </video>
+            </article>
+
+          </div>
+         <div class="panel" id="panelusers">
+
+
+        </div>
+</div>
+</div>
+
+
+
+
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/bootstrap.js"></script>
+
+<script src="/javascripts/socket.io.js"></script>
+
+</div>
+<script>
+    $(function(){
+
+        var username="walter";
+        var socket = io('http://114.215.124.31:5555');
+        socket.on('connect', function () {
+
+            console.log("connected!");
+
+            socket.on('message', function(message) {
+                console.log(message);
+            });
+
+
+            socket.on('disconnect', function() {
+                console.log("Disconnected");
+            });
+
+        });
+
+        //监听服端post过来的事件
+        socket.on('photo', function (data) {
+           //服务器发来的图片
+            var canvas=$('#'+data.username);
+
+            if(canvas.length==0)
+            {
+                var canvas = document.createElement("canvas");
+                canvas.id=data.username;
+                canvas.width=500;
+                canvas.height=375;
+                document.getElementById("panelusers").appendChild(canvas);
+
+            }
+            else{
+                canvas=canvas.get(0);
+            }
+            var ctx=canvas.getContext("2d");
+
+            //创建一个图片
+            var image=new Image();
+            image.src=data.p;
+
+           // console.log(data.p);
+            ctx.drawImage(image, 0, 0);
+
+
+        });
+
+        //读取自己视频
+        var video = document.querySelector('video');
+        function gumSuccess(stream) {
+            // window.stream = stream;
+            if ('mozSrcObject' in video) {
+                video.mozSrcObject = stream;
+            } else if (window.URL) {
+                video.src = window.URL.createObjectURL(stream);
+            } else {
+                video.src = stream;
+            }
+            video.play();
+        }
+
+        function gumError(error) {
+            console.error('Error on getUserMedia', error);
+        }
+
+        function gumInit() {
+            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+            if (navigator.getUserMedia) {
+                navigator.getUserMedia({video: true }, gumSuccess, gumError);
+            }
+        }
+        gumInit();
+
+        $("#video").bind("play", function () {
+            drawCanvas();
+        });
+
+        //画
+        function drawCanvas() {
+            if (video.paused || video.ended) {
+                return;
+            }
+            var canvas = document.createElement("canvas");
+            canvas.width=500;
+            canvas.height=375;
+            var context = canvas.getContext("2d");
+
+            context.drawImage(video, 0, 0,500,375);
+            socket.emit('photo', {username:username, p: canvas.toDataURL('image/png')});
+
+            setTimeout(drawCanvas, 200);
+        }
+    });
+</script>
+</body>
+</html>

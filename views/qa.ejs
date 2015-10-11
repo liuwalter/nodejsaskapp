@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="author" content="walter <louja@qq.com>"/>
+    <link rel='stylesheet' href='/stylesheets/main.css'/>
+    <link rel='stylesheet' href='/stylesheets/qa.css'/>
+    <link rel='stylesheet' href='/stylesheets/font-awesome.css'/>
+</head>
+<body>
+
+<!-- 头部导航 -->
+<div class="navbar navbar-default" id="navbar" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class=" navbar-brand icon-logo logintext" href="/" title="问码">问码</a>
+            <a id="mSearch" class="mobile-search glyphicon glyphicon-search" href="javascript:void 0;"></a>
+            <form class="navbar-form navbar-right" id="navbarForm" action="/search/" method="GET" role="search">
+                <div class="form-group">
+                    <input class="form-control" type="text" maxlength="50" placeholder="搜索问题、帖子、文章" name="wd">
+                </div>
+                <button class="btn icon-search glyphicon glyphicon-search ct" type="submit">&nbsp;</button>
+
+            </form>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="nav navbar-nav navbar-right" id="unlogined">
+                <li class="navbar-sign">
+                    <a rel="nofollow" href="javascript:void(0);" class="open-reg" >注册</a>
+                </li>
+                <li class="navbar-login">
+                    <a rel="nofollow" href="javascript:void(0);" data-operation="login" class="open-login" >登录</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="nav nav-main" id="navMain">
+    <ul class="container"><li><a href="/" >首页</a></li><li><a href="/course/" >技术文章</a>
+        </li><li><a href="/topic/">书籍</a></li><li class="active"><a href="/talk/">活动</a></li>
+        <li><a href="/post/">问吧</a></li>
+        <li class="guide"><a id="guideLink" href="/help/" target="_blank" ><span class="icon-guide"></span>新手入门</a></li>
+    </ul>
+</div>
+
+
+
+<div class="container">
+    <div class="banner" id="banner">
+        <div id="bdadm-1059284" class="banner"></div>
+    </div>
+    <div class="fields_box">
+        <div class="menu-bar">
+            <ul class="tabs nav-pills" id="tabs">
+                <li  <%if(currentchannel=='all'){%> class="active" <%}%>><a href="/qa?channel_id=all">全部</a></li>
+                <li  <%if(currentchannel=='top'){%> class="active" <%}%>><a href="/qa?channel_id=top">精华区</a></li>
+                <% if (channels.length) { %>
+                <% channels.forEach(function(channel){ %>
+                <li  <%if(channel._id==currentchannel){%> class="active" <%}%> ><a href="/qa?channel_id=<%=channel._id%>" data="<%=channel._id%>"><%=channel.channelname%></a></li>
+                <% }) %>
+                <% } %>
+            </ul>
+            <a class="btn-primary" href="/qa/new?channel_id=<%=currentchannel%>" data=""><span
+                        class="glyphicon glyphicon-pencil"></span>&nbsp;发问题</a>
+        </div>
+        <ul class="discuss_list" id="discussList">
+            <li data-post-id="615301" class="post">
+                <h3 class="discuss-title"><span class="sort">前端基础</span><span class="icon-up"></span><a
+                            href="http://mooc.guokr.com/post/615301/" target="_blank"
+                            data-gaevent="post_list-list-title:v3.0.0.0:academy">【前端基础】闭包求解?</a><span
+                            class="icon-official"></span>
+                </h3>
+                <span class="discuss-author"><a href="http://mooc.guokr.com/user/1823075186/" class="info-item author"
+                                                title="walter.liu" data-gaevent="post_list-list-author:v3.0.0.0:academy">walter.liu</a></span>
+                    <span class="discuss-num">
+                        38
+                    </span>
+                    <span class="discuss-time">
+                        1小时前
+                    </span>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<!--登录框-->
+<div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form id="loginInform" action="/users/login" accept-charset="UTF-8" method="post"  autocomplete="off">
+        <div class="modal-dialog modal-login">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 id="myModalLabel" class="modal-title">
+                        <span class="action on " data="login">登陆</span><span class="zc" data="reg">注册</span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <div>
+                        <ul>
+                            <li> <i class="fa fa-envelope"></i><input class="form-control" type="text" placeholder="登陆邮箱" id="lemail" name="lemail"/></li>
+                            <li> <i class="fa fa-unlock-alt"></i><input class="form-control" type="password" placeholder="登陆密码" name="pwd" autocomplete="off"/></li>
+                            <li><input id="remember" type="checkbox" name="remember" />
+                                <label for="remember">自动登陆</label><a class="right col-md-4 txtright" href="/forget" target="_blank">忘记密码？</a></li>
+                            <li><button class="btn btn-success" type="submit">登陆</button></li>
+
+                        </ul>
+                    </div>
+
+                    <div style="display: none">
+                        <ul>
+                            <li> <input class="form-control" type="text" placeholder="登陆邮箱" id="lemail" name="lemail"/></li>
+                            <li> <input class="form-control ng-hide" type="text" placeholder="注册邮箱" id="semail"  name="semail" /></li>
+                            <li><input class="form-control" type="password" placeholder="密码6位以上" name="pwd" autocomplete="off"  /></li>
+                            <li><input id="nickname" class="form-control" type="text" placeholder="昵称" name="nc" /></li>
+                            <li><input id="nickname" class="form-control" type="text" placeholder="昵称" name="nc" /></li>
+                            <li><input id="remember" type="checkbox" name="remember" />
+                                <label for="remember">自动登陆</label><a class="right col-md-4 txtright" href="/forget" target="_blank">忘记密码？</a></li>
+                            <li><button class="btn btn-success" type="submit">登陆</button></li>
+                            <li><button class="btn btn-success" type="submit">注册</button></li>
+                        </ul>
+                    </div>
+
+                  </div>
+                <div class="modal-footer txtcenter">
+                    其他登录方式正在开通中...
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+<!--结束登录框-->
+
+
+
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/bootstrap.js"></script>
+<script type="text/javascript">
+
+    //登录按钮事件
+    $(".open-login").on("click",function(){
+        $('#loginModal').modal('show');
+        $($("#myModalLabel span")[0]).trigger("click");
+    });
+    //注册事件
+    $(".open-reg").on("click",function(){
+        $('#loginModal').modal('show');
+        $($("#myModalLabel span")[1]).trigger("click");
+    });
+    //登出
+    $(".open-logout").on("click",function(){
+
+        $.get("/users/logout",function(r){if(r.status){ window.location.reload();}});
+    });
+
+    //切换登录注册状态
+    $("#myModalLabel span").on("click",function(){
+        $("#myModalLabel span").removeClass("on");
+        if(!$(this).hasClass("on"))
+        {
+            $(this).addClass("on");
+        }
+
+        //如果是注册
+        if($(this).attr("data")=="reg")
+        {
+            //改变from的action
+            $("#loginInform").attr("action","/users/reg");
+            $("#semail").removeClass("ng-hide");
+            $("#lemail").addClass("ng-hide");
+
+            $("#frmnickname").removeClass("ng-hide");
+
+            $("#frmauto").addClass("ng-hide");
+
+
+            $("#frmlogin").addClass("ng-hide");
+            $("#frmregister").removeClass("ng-hide");
+        }
+        else if($(this).attr("data")=="login")
+        {
+            $("#loginInform").attr("action","/users/login");
+            $("#semail").addClass("ng-hide");
+            $("#lemail").removeClass("ng-hide");
+
+            $("#frmnickname").addClass("ng-hide");
+
+            $("#frmauto").removeClass("ng-hide");
+
+
+            $("#frmlogin").removeClass("ng-hide");
+            $("#frmregister").addClass("ng-hide");
+        }
+    });
+</script>
+</body>
+</html>
